@@ -1,3 +1,1 @@
-# ModuleSites
-# ModuleSites
-# ModuleSites
+This school project is intended for module activity purposes only. It is created for educational and learning purposes and should not be used for any commercial, official, or unauthorized activities.
