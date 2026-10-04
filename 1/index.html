@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Explore the World - Multimedia Presentation</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: Arial, Helvetica, sans-serif;
+            background: #eef6f9;
+            color: #222;
+            line-height: 1.6;
+        }
+
+        header {
+            background: linear-gradient(135deg, #006994, #00a8cc);
+            color: white;
+            text-align: center;
+            padding: 45px 20px;
+        }
+
+        header h1 {
+            font-size: 42px;
+            margin-bottom: 10px;
+        }
+
+        header p {
+            font-size: 18px;
+        }
+
+        section {
+            width: 90%;
+            max-width: 1100px;
+            margin: 45px auto;
+        }
+
+        section h2 {
+            text-align: center;
+            margin-bottom: 25px;
+            color: #006994;
+        }
+
+        /* =========================
+           SLIDESHOW
+        ========================= */
+
+        .slideshow-container {
+            position: relative;
+            max-width: 850px;
+            height: 480px;
+            margin: auto;
+            overflow: hidden;
+            border-radius: 18px;
+            background: #111;
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+        }
+
+        #slideshow {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            opacity: 1;
+            transition: opacity 1s ease-in-out;
+        }
+
+        #caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 20px;
+            background: linear-gradient(transparent,
+                    rgba(0, 0, 0, 0.8));
+            color: white;
+            font-size: 22px;
+            font-weight: bold;
+        }
+
+        .slide-controls {
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        .slide-controls button {
+            padding: 10px 20px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            background: #006994;
+            color: white;
+            cursor: pointer;
+        }
+
+        .slide-controls button:hover {
+            background: #004d6d;
+        }
+
+        /* =========================
+           AUDIO
+        ========================= */
+
+        .audio-box {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        audio {
+            width: 100%;
+            max-width: 700px;
+            margin-top: 15px;
+        }
+
+        /* =========================
+           VIDEO
+        ========================= */
+
+        .video-container {
+            text-align: center;
+        }
+
+        video {
+            width: 100%;
+            max-width: 850px;
+            border-radius: 15px;
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        /* =========================
+           GLOBE
+        ========================= */
+
+        .globe-section {
+            text-align: center;
+        }
+
+        .globe-wrapper {
+            position: relative;
+            width: 360px;
+            height: 360px;
+            margin: 40px auto;
+        }
+
+        .globe {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            position: relative;
+            overflow: hidden;
+
+            background:
+                radial-gradient(circle at 30% 30%,
+                    #62d7ff,
+                    #008dcc 55%,
+                    #00577e);
+
+            box-shadow:
+                inset -35px -20px 50px rgba(0, 0, 0, 0.35),
+                inset 15px 10px 30px rgba(255, 255, 255, 0.3),
+                0 0 35px rgba(0, 150, 220, 0.45);
+
+            animation: rotateGlobe 15s linear infinite;
+        }
+
+        .globe:hover {
+            animation-play-state: paused;
+        }
+
+
+        @keyframes rotateGlobe {
+            from {
+                transform: rotate(0deg);
+            }
+
+            to {
+                transform: rotate(360deg);
+            }
+        }
+
+        /*
+            The continent shapes are simplified for the
+            educational interactive globe.
+        */
+
+        .continent {
+            position: absolute;
+            background: #4caf50;
+            border: 2px solid #236b2a;
+            cursor: pointer;
+            transition:
+                transform 0.3s,
+                background 0.3s,
+                box-shadow 0.3s;
+        }
+
+        .continent:hover {
+            background: #ffd54f;
+            transform: scale(1.12);
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.8);
+        }
+
+        /* North America */
+        .north-america {
+            width: 85px;
+            height: 100px;
+            left: 65px;
+            top: 65px;
+            border-radius: 45% 30% 50% 40%;
+            transform: rotate(25deg);
+        }
+
+        /* South America */
+        .south-america {
+            width: 55px;
+            height: 110px;
+            left: 125px;
+            top: 175px;
+            border-radius: 45% 50% 55% 40%;
+            transform: rotate(20deg);
+        }
+
+        /* Europe */
+        .europe {
+            width: 48px;
+            height: 42px;
+            left: 190px;
+            top: 90px;
+            border-radius: 50%;
+        }
+
+        /* Africa */
+        .africa {
+            width: 70px;
+            height: 100px;
+            left: 185px;
+            top: 135px;
+            border-radius: 45% 45% 50% 50%;
+        }
+
+        /* Asia */
+        .asia {
+            width: 110px;
+            height: 75px;
+            left: 220px;
+            top: 85px;
+            border-radius: 50% 40% 40% 45%;
+        }
+
+        /* Australia */
+        .australia {
+            width: 65px;
+            height: 45px;
+            left: 260px;
+            top: 220px;
+            border-radius: 50%;
+        }
+
+        .package-info {
+            min-height: 120px;
+            max-width: 650px;
+            margin: 20px auto;
+            padding: 25px;
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .package-info h3 {
+            color: #006994;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           MULTIMEDIA CONCEPTS
+        ========================= */
+
+        .concepts {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 20px;
+        }
+
+        .concept-card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .concept-card h3 {
+            color: #006994;
+            margin-bottom: 10px;
+        }
+
+        /* =========================
+           FOOTER
+        ========================= */
+
+        footer {
+            margin-top: 50px;
+            padding: 25px;
+            text-align: center;
+            background: #003f5c;
+            color: white;
+        }
+
+        /* =========================
+           MOBILE
+        ========================= */
+
+        @media (max-width: 600px) {
+
+            header h1 {
+                font-size: 30px;
+            }
+
+            .slideshow-container {
+                height: 300px;
+            }
+
+            .globe-wrapper {
+                width: 300px;
+                height: 300px;
+            }
+
+            .north-america {
+                left: 50px;
+            }
+
+            .south-america {
+                left: 105px;
+            }
+
+            .europe {
+                left: 160px;
+            }
+
+            .africa {
+                left: 155px;
+            }
+
+            .asia {
+                left: 190px;
+            }
+
+            .australia {
+                left: 220px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <h1>Explore the World</h1>
+        <p>Your Journey Begins Here</p>
+    </header>
+
+
+    <!-- =========================================
+     SLIDESHOW
+========================================= -->
+
+    <section>
+
+        <h2>Featured Vacation Destinations</h2>
+
+        <div class="slideshow-container">
+
+            <img id="slideshow" src="image1.jpg" alt="Beach destination">
+
+            <div id="caption">
+                Tropical Paradise
+            </div>
+
+        </div>
+
+        <div class="slide-controls">
+
+            <button onclick="previousImage()">
+                Previous
+            </button>
+
+            <button onclick="nextImage(true)">
+                Next
+            </button>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+     AUDIO
+========================================= -->
+
+    <section>
+
+        <h2>Travel Agent Voiceover</h2>
+
+        <div class="audio-box">
+
+            <p>
+                Listen to our travel agent describe the benefits
+                of our vacation packages.
+            </p>
+
+            <audio id="travelAudio" controls autoplay>
+                <source src="travel-agent.mp3" type="audio/mpeg">
+
+                Your browser does not support HTML5 audio.
+            </audio>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+     VIDEO
+========================================= -->
+
+    <section>
+
+        <h2>Featured Tourist Attraction</h2>
+
+        <div class="video-container">
+
+            <video id="travelVideo" controls autoplay muted loop playsinline>
+
+                <source src="tourist-attraction.mp4" type="video/mp4">
+
+                Your browser does not support HTML5 video.
+
+            </video>
+
+            <p>
+                Enjoy this 30-second preview of one of our
+                featured tourist attractions.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+     INTERACTIVE GLOBE
+========================================= -->
+
+    <section class="globe-section">
+
+        <h2>Explore Vacation Packages</h2>
+
+        <p>
+            Hover over a continent to view available
+            vacation packages.
+        </p>
+
+        <div class="globe-wrapper">
+
+            <div class="globe" id="globe">
+
+                <div class="continent north-america" data-continent="North America" title="North America"></div>
+
+                <div class="continent south-america" data-continent="South America" title="South America"></div>
+
+                <div class="continent europe" data-continent="Europe" title="Europe"></div>
+
+                <div class="continent africa" data-continent="Africa" title="Africa"></div>
+
+                <div class="continent asia" data-continent="Asia" title="Asia"></div>
+
+                <div class="continent australia" data-continent="Australia" title="Australia"></div>
+
+            </div>
+
+        </div>
+
+        <div class="package-info" id="packageInfo">
+
+            <h3>Hover over a continent</h3>
+
+            <p>
+                Move your mouse over a continent to discover
+                our available vacation packages.
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- =========================================
+     MULTIMEDIA CONCEPTS
+========================================= -->
+
+    <section>
+
+        <h2>Multimedia Concepts</h2>
+
+        <div class="concepts">
+
+            <div class="concept-card">
+
+                <h3>Images</h3>
+
+                <p>
+                    Images are visual multimedia data used to
+                    present destinations and attractions.
+                    JPEG is used because it provides good
+                    image quality while reducing file size.
+                </p>
+
+            </div>
+
+
+            <div class="concept-card">
+
+                <h3>Audio</h3>
+
+                <p>
+                    Audio provides spoken information from the
+                    travel agent. MP3 compression reduces the
+                    file size while maintaining acceptable
+                    sound quality.
+                </p>
+
+            </div>
+
+
+            <div class="concept-card">
+
+                <h3>Video</h3>
+
+                <p>
+                    Video combines images and audio over time
+                    to demonstrate a tourist attraction.
+                    MP4 is commonly used for efficient
+                    multimedia distribution.
+                </p>
+
+            </div>
+
+
+            <div class="concept-card">
+
+                <h3>Compression</h3>
+
+                <p>
+                    Compression reduces the amount of storage
+                    required by multimedia files. JPEG uses
+                    lossy compression, which removes some
+                    visual information that is less noticeable
+                    to human viewers.
+                </p>
+
+            </div>
+
+
+            <div class="concept-card">
+
+                <h3>File Formats</h3>
+
+                <p>
+                    JPEG is used for photographs, MP3 for
+                    compressed audio, and MP4 for video.
+                    Different formats are selected according
+                    to the type of multimedia data.
+                </p>
+
+            </div>
+
+
+            <div class="concept-card">
+
+                <h3>Data Representation</h3>
+
+                <p>
+                    Digital multimedia represents images,
+                    audio and video as binary data. This allows
+                    computers to store, process and transmit
+                    multimedia content.
+                </p>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <footer>
+
+        <p>
+            Explore the World &copy; 2026
+        </p>
+
+        <p>
+            Multimedia Development Project
+        </p>
+
+    </footer>
+
+
+    <script>
+
+        /* =========================================
+           SLIDESHOW
+        ========================================= */
+
+        const images = [
+            "image1.jpg",
+            "image2.jpg",
+            "image3.jpg",
+            "image4.jpg",
+            "image5.jpg"
+        ];
+
+        const captions = [
+            "Venice Grand Canal, Philippines",
+            "Samal Island, Philippines",
+            "Sky Ranch Tagaytay, Philippines",
+            "National Museum of Anthropology, Philippines",
+            "Jack's Ridge Davao, Philippines"
+        ];
+
+        let currentImage = 0;
+
+        const slideshow =
+            document.getElementById("slideshow");
+
+        const caption =
+            document.getElementById("caption");
+
+
+        function showImage(index) {
+
+            slideshow.style.opacity = "0";
+
+            setTimeout(function () {
+
+                slideshow.src = images[index];
+
+                slideshow.alt = captions[index];
+
+                caption.textContent = captions[index];
+
+                slideshow.style.opacity = "1";
+
+            }, 500);
+        }
+
+
+        function nextImage(manual = false) {
+
+            currentImage =
+                (currentImage + 1) % images.length;
+
+            showImage(currentImage);
+
+            if (manual) {
+
+                resetSlideshowTimer();
+
+            }
+        }
+
+
+        function previousImage() {
+
+            currentImage =
+                (currentImage - 1 + images.length)
+                % images.length;
+
+            showImage(currentImage);
+
+            resetSlideshowTimer();
+        }
+
+
+        let slideshowTimer;
+
+
+        function resetSlideshowTimer() {
+
+            clearInterval(slideshowTimer);
+
+            slideshowTimer =
+                setInterval(function () {
+
+                    nextImage();
+
+                }, 5000);
+
+        }
+
+
+        showImage(currentImage);
+
+        resetSlideshowTimer();
+
+
+        /* =========================================
+           AUDIO AUTOPLAY
+        ========================================= */
+
+        const audio = document.getElementById("travelAudio");
+
+        function playAudio() {
+            audio.play().catch(function () {
+                console.log("Audio autoplay blocked.");
+            });
+        }
+
+        window.addEventListener("load", playAudio);
+        document.addEventListener("click", playAudio, {once: true});
+
+        /* =========================================
+           VIDEO
+        ========================================= */
+
+        const video =
+            document.getElementById("travelVideo");
+
+        window.addEventListener("load", function () {
+
+            video.play().catch(function () {
+
+                console.log(
+                    "Video autoplay was blocked."
+                );
+
+            });
+
+        });
+
+
+        /* =========================================
+           INTERACTIVE GLOBE
+        ========================================= */
+
+        const globe =
+            document.getElementById("globe");
+
+        const packageInfo =
+            document.getElementById("packageInfo");
+
+
+        const packages = {
+
+            "North America": {
+                title: "North America Package",
+                description:
+                    "Explore famous cities, national parks, " +
+                    "beaches and cultural attractions across " +
+                    "North America."
+            },
+
+            "South America": {
+                title: "South America Package",
+                description:
+                    "Experience tropical destinations, " +
+                    "mountains, historical locations and " +
+                    "vibrant local cultures."
+            },
+
+            "Europe": {
+                title: "European Escape",
+                description:
+                    "Visit historic cities, museums, castles " +
+                    "and beautiful European destinations."
+            },
+
+            "Africa": {
+                title: "African Safari Package",
+                description:
+                    "Discover wildlife, nature reserves, " +
+                    "unique landscapes and cultural attractions."
+            },
+
+            "Asia": {
+                title: "Asian Adventure",
+                description:
+                    "Experience ancient cultures, modern cities, " +
+                    "beautiful beaches and famous landmarks."
+            },
+
+            "Australia": {
+                title: "Australia Adventure",
+                description:
+                    "Explore beaches, wildlife, natural wonders " +
+                    "and exciting Australian cities."
+            }
+
+        };
+
+
+        const continents =
+            document.querySelectorAll(".continent");
+
+
+        continents.forEach(function (continent) {
+
+            continent.addEventListener(
+                "mouseover",
+                function () {
+
+                    const continentName =
+                        this.getAttribute("data-continent");
+
+                    const selectedPackage =
+                        packages[continentName];
+
+                    packageInfo.innerHTML = `
+
+                    <h3>
+                        ${selectedPackage.title}
+                    </h3>
+
+                    <p>
+                        ${selectedPackage.description}
+                    </p>
+
+                `;
+
+                }
+            );
+
+
+            continent.addEventListener(
+                "mouseout",
+                function () {
+
+                    packageInfo.innerHTML = `
+
+                    <h3>
+                        Hover over a continent
+                    </h3>
+
+                    <p>
+                        Move your mouse over a continent
+                        to discover our available
+                        vacation packages.
+                    </p>
+
+                `;
+
+                }
+            );
+
+        });
+
+    </script>
+
+</body>
+
+</html>
